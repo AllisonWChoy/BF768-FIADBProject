@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-04-02T00:33:24.113Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.83 Safari/537.36" etag="5sYIse_BnJ-JYvlhZFVG" version="17.4.0" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-04-02T00:34:15.752Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.83 Safari/537.36" etag="kBA4tFZGB_TSrZymRsP3" version="17.4.0" type="github" pages="2">
   <diagram id="R2lEEEUBdFMjLlhIrx00" name="Page-1">
     <mxGraphModel dx="846" dy="852" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0" extFonts="Permanent Marker^https://fonts.googleapis.com/css?family=Permanent+Marker">
       <root>
@@ -226,7 +226,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="lYidJZD9XB2wq7RGc0TW-28" value="Mortality" style="shape=table;startSize=30;container=1;collapsible=1;childLayout=tableLayout;fixedRows=1;rowLines=0;fontStyle=1;align=center;resizeLast=1;" vertex="1" parent="1">
-          <mxGeometry x="35" y="410" width="330" height="210" as="geometry" />
+          <mxGeometry x="35" y="413" width="330" height="187" as="geometry" />
         </mxCell>
         <mxCell id="lYidJZD9XB2wq7RGc0TW-29" value="" style="shape=tableRow;horizontal=0;startSize=0;swimlaneHead=0;swimlaneBody=0;fillColor=none;collapsible=0;dropTarget=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;top=0;left=0;right=0;bottom=1;" vertex="1" parent="lYidJZD9XB2wq7RGc0TW-28">
           <mxGeometry y="30" width="330" height="30" as="geometry" />
@@ -474,7 +474,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="lYidJZD9XB2wq7RGc0TW-104" value="treeid - FK refering to Tree table" style="shape=partialRectangle;connectable=0;fillColor=none;top=0;left=0;bottom=0;right=0;align=left;spacingLeft=6;overflow=hidden;" vertex="1" parent="1">
-          <mxGeometry x="60" y="560" width="310" height="30" as="geometry">
+          <mxGeometry x="60" y="577" width="310" height="3" as="geometry">
             <mxRectangle width="310" height="30" as="alternateBounds" />
           </mxGeometry>
         </mxCell>
