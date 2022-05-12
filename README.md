@@ -14,7 +14,7 @@ https://bioed.bu.edu/students_22/Group_F/FIADB.html
 
 **Merai Dandouch** - Plots_Tab 
 
-**Raghad Yamani**
+**Raghad Yamani** - Home, contact, and help tabs
 
 # Repository Contents
 
