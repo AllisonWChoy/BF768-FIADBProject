@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 2px;
+  text-align: center;
+  background: #6B8E23;
+  color: White;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 30px;
+}
+
+/* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Active/current link */
+.navbar a.active {
+  background-color: #666;
+  color: white;
+}
+
+
+
+* {
+  box-sizing: border-box;
+}
+
+/* Style inputs */
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  resize: vertical;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+/* Style the container/contact section */
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 10px;
+}
+
+/* Create two columns that float next to eachother */
+.column {
+  float: left;
+  width: 50%;
+  margin-top: 6px;
+  padding: 20px;
+}
+
+/* Footer */
+.footer {
+  padding: 5px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
+  </head>
+  <body>
+
+
+  <div class="header">
+    <h1>Massachusetts National FIA Tree Database</h1>
+    <p>A <b>database</b> for massachusetts forests</p>
+  </div>
+
+  <div class="navbar">
+    <a href="FIADB.html">Home</a>
+    <a href="FIAQuery.html">Query</a>
+    <a href="groupF_histo.html">Plots</a>
+    <a href="help.html" class="active">Help</a>
+    <a href="contact.html">Contact Us</a>
+  </div>
+
+<div class="container">
+  <div style="text-align:left">
+    <h1>Help</h1>
+    <h3>Home Page</h3>
+    <p>The home page has informations and a summary about our database with a despcription of the original database.
+      The name of each member is provided at the main page with our professor name</p>
+    <h3>Query Page</h3>
+       <h4> The following are code tables for the graphical results and tables generated from the queries: </h4>
+    <p>The Agent Code:</p>
+    <img src="https://bioed.bu.edu/images/students_22/Group_F/AGENTCD.png" alt="Agent code table" width="600" height="400">
+    <p>The Decay Code:</p>
+    <img src="https://bioed.bu.edu/images/students_22/Group_F/DECAYCD.png" alt="Decay code table" width="600" height="600">
+    <p>The Damage Location Code:</p>
+    <img src="https://bioed.bu.edu/images/students_22/Group_F/DAMLOC.png" alt="Damage Location Code table" width="600" height="300">
+    <p>The Damage Type Code:</p>
+    <img src="https://bioed.bu.edu/images/students_22/Group_F/DAMTYPE.png" alt="Damage Type Code table" width="600" height="400">
+    <p>The Damage Severity Code:</p>
+    <img src="https://bioed.bu.edu/images/students_22/Group_F/DAMSEV.png" alt="Damage Severity Code table" width="600" height="300">
+    <h3>Plots Page</h3>
+    <p>This page will return plots such as bar charts, line charts, histograms, and bubble charts to explore interesting variables and trends in the Massachusetts FIA Tree database. The charts below are rendered by Google Charts API. Just click the dropdown menu to populate different plots to see relationships between different variables in the FIA database! For example, Tree Abundance and Species Abundance displays the number of Trees in each plot and the number of Species in general. Total Sum Biomass allows users to see the relationship between CarbonBG and CarbonAG in pounds for each year, the size of the bubble refers to tree population, so the bigger the bubble, the more trees there are in that year! This type of graph can also be seen in Total Sum Mortality vs Growth, instead its plotting MORTCFAL against GROWCFAL for each year. Average Growth and Average Mortality are shown in a grouped barchart and linechart.</p>
+    <h3>Contac Us Page</h3>
+    <p>This page is for contacting us. The user can use the email or submit the question using the form provided there.</p>
+
+  </div>
+</div>
+
+
+
+
+
+
+<div class="footer">
+<p>This project was developed at Boston University as
+  part of BF768, Spring 2022, G. Benson instructor</p>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Boston_University_wordmark.svg/1000px-Boston_University_wordmark.svg.png?20200623211014" alt="H" width="120" height="50">
+<p>Last revised May 11, 2022</p>
+</div>
+
+</body>
+</html>
