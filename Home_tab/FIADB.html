@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>FIADB</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+/* Style the body */
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+}
+
+/* Header/logo Title */
+.header {
+  padding: 2px;
+  text-align: center;
+  background: #6B8E23;
+  color: White;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 30px;
+}
+
+/* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Active/current link */
+.navbar a.active {
+  background-color: #666;
+  color: white;
+}
+
+/* Column container */
+.row {  
+  display: -ms-flexbox; /* IE10 */
+  display: flex;
+  -ms-flex-wrap: wrap; /* IE10 */
+  flex-wrap: wrap;
+}
+
+/* Create two unequal columns that sits next to each other */
+/* Sidebar/left column */
+.side {
+  -ms-flex: 30%; /* IE10 */
+  flex: 30%;
+  background-color: #f1f1f1;
+  padding: 20px;
+}
+
+/* Main column */
+.main {   
+  -ms-flex: 70%; /* IE10 */
+  flex: 70%;
+  background-color: white;
+  padding: 20px;
+}
+
+/* Fake image, just for this example */
+.img {
+  width: 100%;
+  padding: 20px;
+}
+
+/* Footer */
+.footer {
+  padding: 5px;
+  text-align: center;
+  background: #ddd;
+}
+
+/* Responsive layout - when the screen is less than 700px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .row {   
+    flex-direction: column;
+  }
+}
+
+/* Responsive layout - when the screen is less than 400px wide, make the navigation links stack on top of each other instead of next to each other */
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Massachusetts National FIA Tree Database</h1>
+  <p>A <b>database</b> for massachusetts forests</p>
+</div>
+
+<div class="navbar">
+  <a href="FIADB.html" class="active">Home</a>
+  <a href="FIAQuery.html">Query</a>
+  <a href="groupF_histo.html">Plots</a>
+  <a href="help.html">Help</a>
+  <a href="contact.html">Contact Us</a>
+</div>
+
+<div class="row">
+  <div class="side">
+    <h2>About</h2>
+    <p style= "text-align:left;">This page aims to help professors at BU by providing an updated forest inventory database to help centennial scale projections of forest response to environmental change over time and better estimate terrestrial ecosystem models.This database is part of a project was developed at Boston University as
+      part of BF768 course, Spring 2022</p>
+    <h4>Website developers:</h4>
+    <p>Allison Choy</p>
+    <p>Kyra Griffin</p>
+    <p>Merai Dandouch</p>
+    <p>Raghad Yamani</p>
+    <h4>Under Supervision:</h4>
+    <p><a href="https://people.bu.edu/dietze/dietze.html">Prof. Michael Dietze</a></p>
+    <p><a href="https://www.bu.edu/biology/people/profiles/gary-benson/">Prof. Gary Benson</a></p>
+    </div>
+    <div class="main">
+    <h2>Forest Data Inventory</h2>
+    <h4>Summary abour our  database</h4>
+    <img src="https://www.mass.gov/files/2018-07/Forestry%20on%20state%20lands%20Dtop.jpg" 
+     width="400" 
+     height="250" />
+    <p>This database is for Massachusetts forests using the national forest inventory database provided by the US Forest Service. The user will be able to grab information about Massachusetts forests trees. There are seven main tables used as a part of our database. Tree, damage, species, location, mortality, growth, and biomass tables. Those tables will be used for our main queries to allow the user to detect change over time. For example: change in mean steam density,  growth, and mortality rate at the tree level.</p>
+    <br>
+    <h2>USFS Forest Inventory Database</h2>
+    <h4>More information about the database we used as a reference</h4>
+     <h5>Click on the image below to visit their website</h5>
+    <a href="https://www.fia.fs.fed.us/">
+    <img alt="FIA" src="https://cse-net.org/wp-content/uploads/2021/03/USDA-Forest.jpg" 
+     width="400" 
+     height="250" />
+     </a>
+    <p>The national forest inventory data is provided by the US Forest Service, containing information to assess America’s forests. There are over 50 years of data, 20 of which is relailable under a single design. The data contains information about tree characteristics collected from trail plots where surveyors noted the latitude and longitude, diameter, health status, vegetation in the crown, number tree rings, biomass, volume, and plot level information. A limitation of the data includes scrambled longitude and latitude on each tree plot in order to conserve and protect the locations of certain forests.</p>
+  </div>
+</div>
+
+<div class="footer">
+  <p>This project was developed at Boston University as
+    part of BF768, Spring 2022, G. Benson instructor </p>
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Boston_University_wordmark.svg/1000px-Boston_University_wordmark.svg.png?20200623211014" alt="H" width="120" height="50">
+  <p>Last revised May 11, 2022</p>
+</div>
+
+</body>
+</html>
+
