@@ -1,0 +1,833 @@
+<html>
+    <head>
+        <meta charset="utf-8" /> 
+        
+        
+        <!-- CSS -->
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+              margin: 0;
+            }
+            /* Header/logo Title */
+.header {
+  padding: 2px;
+  text-align: center;
+  background: #6B8E23;
+  color: White;
+}
+
+/* Increase the font size of the heading */
+.header h1 {
+  font-size: 30px;
+}
+
+/* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+.navbar {
+  overflow: hidden;
+  background-color: #333;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+}
+
+/* Style the navigation bar links */
+.navbar a {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 20px;
+  text-decoration: none;
+}
+
+
+/* Right-aligned link */
+.navbar a.right {
+  float: right;
+}
+
+/* Change color on hover */
+.navbar a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+/* Active/current link */
+.navbar a.active {
+  background-color: #666;
+  color: white;
+}
+.container{
+    padding: 10px;
+}
+            input {
+              border: 1px solid transparent;
+              background-color: #f1f1f1; 
+              padding: 10px;
+              font-size: 20px;
+            }
+            
+            button {
+              background-color: rgb(26, 72, 3); 
+              color: #fff; /* white; */
+            }
+            
+            select {
+              font-size: 16px;
+              width: 200px;
+            }
+            
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 15px;
+                word-wrap: break-word;
+                max-width: 150px;
+                font-size: 16px;
+            }
+            
+            table {
+                width: 600px;
+            }
+            
+            th {
+                background-color: #004821;
+                color: white;
+                text-align: left;
+            }
+            
+            td {
+                text-align: left;
+            }
+            tr:nth-child(even) 
+            {background-color: #f2f2f2;}
+
+            #wrapper {
+                border: 1px solid white;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 20px;
+            }
+            #wrapper2 {
+                border: 1px solid white;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-gap: 20px;
+            }
+
+            #x_histogram {
+                display: inline-block;
+                width:800px;
+                height:800px;
+            }
+            #x_table {
+                width:600px;
+                height:700px;
+            }
+            .scroll {
+                overflow-y: scroll;
+                height: 500px;
+                width: 600px;
+                background-color: #fff;
+            }
+
+            .loader {
+                border: 16px solid #f3f3f3; 
+                border-top: 16px solid #0e3518;
+                border-radius: 50%;
+                width: 20px;
+                height: 20px;
+                animation: spin 2s linear infinite;
+            }
+            @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+            }
+            .tableFixHead{ 
+                overflow: auto; 
+                height: 100px; 
+            }
+            .tableFixHead thead th { 
+                position: sticky; 
+                top: 0; 
+                z-index: 1; 
+            }
+            .footer {
+  padding: 5px;
+  text-align: center;
+  background: #ddd;
+}
+@media screen and (max-width: 400px) {
+  .navbar a {
+    float: none;
+    width: 100%;
+  }
+}               
+        </style>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Massachusetts National FIA Tree Database</h1>
+            <p>A <b>database</b> for massachusetts forests</p>
+          </div>
+          
+          <div class="navbar">
+            <a href="FIADB.html">Home</a>
+            <a href="FIAQuery.html">Query</a>
+            <a href="groupF_histo.html"  class="active">Plots</a>
+            <a href="help.html">Help</a>
+            <a href="contact.html">Contact Us</a>
+          </div>
+          <div class="container">
+        <!-- Page Title -->
+        <h1> Plots </h1>
+        <h3> Drop Down Menu for Different Types of Figures </h3>
+        <p>
+            This page will return plots such as bar charts, histograms, and bubble charts to explore interesting.
+            variables and trends in the Massachusetts FIA Tree database The charts below are rendered by Google Charts API.
+        </p>
+        <div id = "wrapper2" > 
+            <div id = "ex1"> 
+                <p> Here's a guide to abbreviations used in these plots and tables: </p>
+                    <ul style=“list-style-type:circle”> 
+                    <li> <strong>CARBON_AG </strong>: Aboveground carbon, in pounds.</li>
+                    <li> <strong>CARBON_BG </strong>: Belowground carbon, in pounds.</li>
+                    <li> <strong>DRYBIO_BOLE </strong>: Dry biomass in the merchantable bole, in pounds. </li>
+                    <li> <strong>DRYBIO_TOP </strong>: Dry biomass in the top and limbs of the tree, oven-dry biomass, in pounds. </li>
+                    <li> <strong>DRYBIO_STUMP</strong>: Dry biomass in the tree stump, oven-dry biomass, in pounds. </li>
+                    <li> <strong>DRYBIO_SAPLING </strong>: Aboveground dry biomass of saplings, oven-dry biomass, in pounds. </li>
+                    <li> <strong>DRYBIO_WDLD_SPP </strong>: Aboveground dry biomass of woodland tree species, oven-dry biomass, in pounds. </li>
+                    <li> <strong>DRYBIO_BG </strong>: Belowground dry biomass, oven-dry biomass, in pounds, of the belowground portion of a tree. </li>
+                    <li> <strong>MORTCFAL </strong>: Sound cubic-foot volume (VOLCFSND) of a tree for mortality purposes on timberland</li>
+                    <li> <strong>GROWCFAL </strong>: Net annual sound cubic-foot volume (VOLCFSND) growth of a live tree on timberland </li>
+                    </ul>
+            </div>
+            <div id = "ex2"> 
+                <p>AgentCD codes refer to cause of death, all remeasured plots when the tree was alive at the
+                    previous visit and at revisit is dead or removed OR the tree is standing dead in the current
+                    inventory </p>
+                    <ul style="list-style-type:circle"> 
+                        <li> 00:  No agent recorded, data prior to 1999). </li> 
+                        <li> 10: Insects </li>
+                        <li> 20: Disease </li> 
+                        <li> 30: Fire </li> 
+                        <li> 40: Animals </li>
+                        <li> 50: Weather </li> 
+                        <li> 60: Vegetation </li> 
+                        <li> 70: Unknown </li> 
+                        <li> 80: Harvesting </li></ul>
+            </div>
+        </div>
+
+        <!-- drop down menu for plot -->
+        <label for="get_histo">Choose a plot:</label>
+        <select id="get_histo">
+            <!-- add histogram options here -->
+            <option value="1" elected=selected>Tree Abundance</option>
+            <option value="2">Tree Size</option>
+            <option value="3">Species Abundance</option>
+            <option value="5"> Average Growth</option>
+            <option value="6"> Average Mortality</option>
+            <option value="4"> Total Sum Biomass</option>
+            <option value="7"> Total Sum Mortality vs Growth</option>
+        </select>
+        <!-- submit button -->
+        <button class="btn1"> Submit</button>
+        <div id="wrapper">
+            <div id="x_histogram"></div>
+            <div id ="container">
+                <button id="btn2" class="btn2" onclick="download_csv()">Download CSV</button> 
+                <div class="scroll tableFixHead"  id="x_table"></div>
+            </div>
+        </div>
+        </div>
+
+
+        <!-- download button -->
+<div class="footer">
+        <p>This project was developed at Boston University as
+            part of BF768, Spring 2022, G. Benson instructor </p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Boston_University_wordmark.svg/1000px-Boston_University_wordmark.svg.png?20200623211014" alt="H" width="120" height="50">
+        <p>Last revised May 11, 2022</p>
+      </div>
+
+        <script> 
+                document.querySelector('.btn2').style.display = 'none'; // hide download csv button until submit button is clicked 
+                document.querySelector('.btn1').addEventListener('click', showBtn); 
+
+                function showBtn(e) { 
+                    document.querySelector('.btn2').style.display = 'block'; 
+                    e.preventDefault(); 
+                } 
+ 
+                google.charts.load("current", {packages:["corechart"]});
+                $(document).ready(function(){                       //event is button click
+                        $(":button").click(function(){              //event is get_miRNAs button clicked 
+                            get_data();
+                        });
+                });
+
+                function get_data(){
+                    let identity = $("#get_histo").val();
+                    if(identity == 1) {
+                            $("#x_histogram").append("<div class='loader'> </div> ")
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"TreeAbundance", identity:identity}, 
+                                format_histogram_1,
+                                "json");
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"TreeAbd_Table", identity:identity}, 
+                                format_table_1,
+                                "json");
+                    }
+                    if(identity == 2) {
+                            $("#x_histogram").append("<div class='loader'>  </div> ")
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"TreeSize", identity:identity}, 
+                                format_histogram_2,
+                                "json");
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"TreeSize_Table", identity:identity}, 
+                                format_table_2,
+                                "json");
+                    }
+                    if(identity == 3) {
+                            $("#x_histogram").append("<div class='loader'> </div> ")
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"SpeciesAbundance"}, 
+                                format_histogram_3,
+                                "json");
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"SPP_Table", identity:identity}, 
+                                format_table_3,
+                                "json");
+                    }
+                    if(identity == 4) {
+                        $("#x_histogram").append("<div class='loader'> </div> ")
+                        $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                        {selector:"Biomass"},
+						  function(data){
+                            format_histogram_4(data);},
+						  "json"); 
+                        $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"Biomass_Table"}, 
+                                    format_table_4,
+                                    "json");
+                        }
+                        if(identity == 5) {
+                            $("#x_histogram").append("<div class='loader'> </div> ")
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"Growth"}, 
+                                format_histogram_5,
+                                "json");
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"Growth_Table"}, 
+                                format_table_5,
+                                "json");
+                    }
+                    if(identity == 6) {
+                            $("#x_histogram").append("<div class='loader'> </div> ")
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"Mort"}, 
+                                format_histogram_6,
+                                "json");
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"Mort_Table"}, 
+                                format_table_6,
+                                "json");
+                    }
+                    if(identity == 7) {
+                            $("#x_histogram").append("<div class='loader'> </div> ")
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"Mort_vs_Growth"}, 
+                                draw_histogram,
+                                "json");
+                            $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/groupF_histo.py",
+                                {selector:"Mort_vs_Growth_Table"}, 
+                                format_table_7,
+                                "json");
+                    }
+                }
+
+                function format_histogram_1(data) {
+                    $("#x_histogram").empty(); //empty histogram 
+                    if (data.length == 1) {
+                        alert(`There was no data for this query!`);
+                        return;
+                    }
+                    var dataTable = google.visualization.arrayToDataTable(data); 
+                    var options = {
+                        title: `Histogram of tree abundance.`, 
+                        width: 800,
+                        height: 800,
+                        hAxis: {title: 'Tree Abundance'},
+                        vAxis: {title: '# of Plots that have this abundance'},
+                        colors:['green'],
+                        legend: {position:"none"}};
+                    var chart = new google.visualization.Histogram(document.getElementById("x_histogram"));
+                    chart.draw(dataTable, options);
+                }
+                function format_table_1(data) {
+                    $("#x_table").empty(); //empty histogram 
+                    if(data.length == 0) {
+                        alert(`There is no Tree Abundance data in this table.`);
+                        return false; 
+                    }
+                    else {
+                        $("#x_table").append(`<div class="tabt"> Tree Abundance for Each Plot </div>`); 
+
+                        let table_body_contents = ""; 
+                        for (let row = 0; row<data.length; row++){
+                            let plot = data[row][0]; 
+                            let count = data[row][1];
+                            table_body_contents += `<tr><td> ${plot}</td><td class="s"> ${count}</td></tr>`;
+                        }
+
+                        let table_template = `<table><thead><tr><th> Plot </th><th class="s">Tree Abundance</th></tr></thead><tbody>${table_body_contents}</tbody></table>`; 
+                        $("#x_table").append(table_template); 
+                    }
+                }
+
+                function format_histogram_2(data) {
+                    $("#x_histogram").empty(); //empty histogram 
+                    if (data.length == 1) {
+                        alert(`There was no data for this query!`);
+                        return;
+                    }
+                    var dataTable = google.visualization.arrayToDataTable(data); 
+                    var options = {
+                        title: `Barchart of the count of tree diameter sizes`, 
+                        width: 500,
+                        height: 700,
+                        hAxis: {title: 'Count'},
+                        vAxis: {title: 'Diameter Sizes (Inches)'},
+                        colors:['green'],
+                        legend: {position:"none"}};
+                    var chart = new google.visualization.BarChart(document.getElementById("x_histogram"));
+                    chart.draw(dataTable, options);
+                }
+
+                function format_table_2(data) {
+                    $("#x_table").empty(); //empty histogram 
+                    if(data.length == 0) {
+                        alert(`There is no tree size data in this table.`);
+                        return false; 
+                    }
+                    else {
+                        $("#x_table").append(`<div class="tabt">Table of Tree Diameter Sizes</div>`); 
+
+                        let table_body_contents = ""; 
+                        for (let row = 0; row<data.length; row++){
+                            let dia = data[row][0]; 
+                            let count = data[row][1];
+                            table_body_contents += `<tr><td> ${dia}</td><td class="s"> ${count}</td></tr>`;
+                        }
+
+                        let table_template = `<table><thead><tr><th>Diameter(Inches)</th><th class="s">Count</th></tr></thead><tbody>${table_body_contents}</tbody></table>`; 
+                        $("#x_table").append(table_template); 
+                    }
+                }
+
+                function format_histogram_3(data) {
+                    $("#x_histogram").empty(); //empty histogram 
+                    if (data.length == 1) {
+                        alert(`There was no data for this query!`);
+                        return;
+                    }
+                    var dataTable = google.visualization.arrayToDataTable(data); 
+                    var options = {
+                        title: `Barchart of genus and species abundance.`, 
+                        hAxis: {title: 'Abundance'},
+                        vAxis: {title: 'Species'},
+                        width: 500,
+                        height: 700,
+                        colors:['green'],
+                        legend: {position:"none"}};
+                    var chart = new google.visualization.BarChart(document.getElementById("x_histogram"));
+                    chart.draw(dataTable, options);
+                }
+                function format_table_3(data) {
+                    $("#x_table").empty(); //empty histogram 
+                    if(data.length == 0) {
+                        alert(`There is no species abundance in this table.`);
+                        return false; 
+                    }
+                    else {
+                        $("#x_table").append(`<div class="tabt"> Table of Species Abundance</div>`); 
+
+                        let table_body_contents = ""; 
+                        for (let row = 0; row<data.length; row++){
+                            let species_name = data[row][0]; 
+                            let count = data[row][1];
+                            table_body_contents += `<tr><td> ${species_name}</td><td class="s"> ${count}</td></tr>`;
+                        }
+
+                        let table_template = `<table><thead><tr><th>Species</th><th class="s">Count</th></tr></thead><tbody>${table_body_contents}</tbody></table>`; 
+                        $("#x_table").append(table_template); 
+                    }
+                }
+                function format_histogram_4(data) {
+                    $("#x_histogram").empty(); //empty histogram 
+                    if (data.length == 1) {
+                        alert(`There was no data for this query!`);
+                        return;
+                    }
+                    var data = google.visualization.arrayToDataTable(data);
+
+                    var formatter = new google.visualization.NumberFormat({pattern: '####'});
+                    formatter.format(data, 3)
+
+                    var options = {
+                        title: 'Carbon Above Ground  vs Carbon Below Ground in selected years (1985-2019).' +
+                        ' X=CarbonBG, Y=CarbonAG, Bubble size=Tree_Count, Bubble color=Year',
+                        hAxis: {title: 'CarbonBG (pounds)'},
+                        vAxis: {title: 'CarbonAG (pounds)'},
+                        bubble: {textStyle: {fontSize: 11}}
+                    };
+
+                    var chart = new google.visualization.BubbleChart(document.getElementById('x_histogram'));
+                    chart.draw(data, options);
+                }
+                function format_table_4(data) {
+                    $("#x_table").empty(); //empty histogram 
+                    if(data.length == 0) {
+                        alert(`There is no species abundance in this table.`);
+                        return false; 
+                    }
+                    else {
+                        $("#x_table").append(`<div class="tabt"> Table of Sum Biomass Per Year</div>`); 
+
+                        let table_body_contents = ""; 
+                        for (let row = 0; row<data.length; row++){
+                            let year= data[row][0]; 
+                            let col1 = data[row][1];
+                            let col2 = data[row][2]; 
+                            let col3 = data[row][3]; 
+                            let col4 = data[row][4]; 
+                            let col5 = data[row][5]; 
+                            let col6 = data[row][6]; 
+                            let col7 = data[row][7];
+                            let col8 = data[row][8];
+                            table_body_contents += `<tr><td class = "y">${year}</td>
+                                                        <td class = "c1"> ${col1}</td>
+                                                        <td class = "c2"> ${col2}</td>
+                                                        <td class = "c3"> ${col3}</td>
+                                                        <td class = "c4"> ${col4}</td>
+                                                        <td class = "c5"> ${col5}</td>
+                                                        <td class = "c6"> ${col6}</td>
+                                                        <td class = "c7"> ${col7}</td>
+                                                        <td class = "c8"> ${col8}</td></tr>`;
+                        }
+
+                        let table_template = `<table><thead><tr><th class = "y"> Year </th>
+                                                                <th class = "c1"> DryBiomass_BOLE </th>
+                                                                <th class = "c2"> DryBiomass_TOP </th>
+                                                                <th class = "c3"> DryBiomass_STUMP </th>
+                                                                <th class = "c4"> DryBiomass_SAPLING </th> 
+                                                                <th class = "c5"> DryBiomass_WildSPP </th> 
+                                                                <th class = "c6"> DryBiomass_BelowGround </th>
+                                                                <th class = "c7"> CARBON_AG </th>
+                                                                <th class = "c8"> CARBON_BG </th></tr></thead>
+                                                                <tbody>${table_body_contents}</tbody></table>`; 
+                        $("#x_table").append(table_template); 
+                    }
+                }
+
+                function format_histogram_5(data){
+                    $("#x_histogram").empty(); //empty histogram 
+                    if (data.length == 1) {
+                        alert(`There was no data for this query!`);
+                        return;
+                    }
+                    var data = google.visualization.arrayToDataTable(data);
+                    var formatter = new google.visualization.NumberFormat({pattern: '####'});
+                    formatter.format(data, 0)
+                    var options = {
+                        title: 'Avg Growth Over Time',
+                        vAxis: {title: 'Average Growth Measurment (Inches)'},
+                        hAxis: {title: 'Years',
+                                format: "####"},
+                        };
+
+                    var chart = new google.visualization.LineChart(document.getElementById('x_histogram'));
+                    chart.draw(data, options);
+
+                }
+
+                function format_table_5(data) {
+                    $("#x_table").empty(); //empty histogram 
+                    if(data.length == 0) {
+                        alert(`There is no species abundance in this table.`);
+                        return false; 
+                    }
+                    else {
+                        $("#x_table").append(`<div class="tabt"> Table of Avg Growth Per Year</div>`); 
+
+                        let table_body_contents = ""; 
+                        for (let row = 0; row<data.length; row++){
+                            let year= data[row][0]; 
+                            let col1 = data[row][1];
+                            let col2 = data[row][2]; 
+                            let col3 = data[row][3]; 
+                            let col4 = data[row][4]; 
+                            let col5 = data[row][5]; 
+                            let col6 = data[row][6]; 
+                            table_body_contents += `<tr><td class = "y">${year}</td>
+                                                        <td class = "c1"> ${col1}</td>
+                                                        <td class = "c2"> ${col2}</td>
+                                                        <td class = "c3"> ${col3}</td>
+                                                        <td class = "c4"> ${col4}</td>
+                                                        <td class = "c5"> ${col5}</td>
+                                                        <td class = "c6"> ${col6}</td></tr>`;
+                        }
+
+                        let table_template = `<table><thead><tr><th class = "y"> Year </th>
+                                                                <th class = "c1"> Diameter_Begin </th>
+                                                                <th class = "c2"> Diameter_Midpoint </th>
+                                                                <th class = "c3"> Diameter_End </th>
+                                                                <th class = "c4"> Height_Begin </th>
+                                                                <th class = "c5"> Height_Midpoint </th>
+                                                                <th class = "c6"> Height_Endpoint </th></tr></thead>
+                                                                <tbody>${table_body_contents}</tbody></table>`; 
+                        $("#x_table").append(table_template); 
+                    }
+                }
+
+                function format_histogram_6(data){
+                    $("#x_histogram").empty(); //empty histogram 
+                    if (data.length == 1) {
+                        alert(`There was no data for this query!`);
+                        return;
+                    }
+                    var data = google.visualization.arrayToDataTable(data);
+                    var formatter = new google.visualization.NumberFormat({pattern: '####'});
+                    formatter.format(data, 0)
+                    var options = {
+                        title: 'Avg Mortality Over Time',
+                        vAxis: {title: 'Average Mortality Measurment (VOLCNSFD) and AGENTCD Count'},
+                        hAxis: {title: 'Years',
+                                format: "####"},
+                        };
+
+                    var chart = new google.visualization.LineChart(document.getElementById('x_histogram'));
+                    chart.draw(data, options);
+                }
+
+                function format_table_6(data){
+                    $("#x_table").empty(); //empty histogram 
+                    if(data.length == 0) {
+                        alert(`There is no species abundance in this table.`);
+                        return false; 
+                    }
+                    else {
+                        $("#x_table").append(`<div class="tabt"> Table of Avg Mortality Per AGENTCD</div>`); 
+                        $("#x_table").append(`<div class="tabt"> <br> </div>`); 
+                        $("#x_table").append(`<div class="tabt"> Please note that the AGENTCD_X columns are one hot encondings (or counts) of each AGENTCD type for each year!</div>`); 
+                        let table_body_contents = ""; 
+                        for (let row = 0; row<data.length; row++){
+                            let year= data[row][0]; 
+                            let col1 = data[row][1];
+                            let col2 = data[row][2]; 
+                            let col3 = data[row][3]; 
+                            let col4 = data[row][4];
+                            let col5 = data[row][5]; 
+                            let col6 = data[row][6]; 
+                            let col7 = data[row][7];
+                            let col8 = data[row][8]; 
+                            let col9 = data[row][9];
+                            table_body_contents += `<tr><td class = "y">${year}</td>
+                                                        <td class = "c1"> ${col1}</td>
+                                                        <td class = "c2"> ${col2}</td>
+                                                        <td class = "c3"> ${col3}</td>
+                                                        <td class = "c4"> ${col4}</td>
+                                                        <td class = "c5"> ${col5}</td>
+                                                        <td class = "c6"> ${col6}</td>
+                                                        <td class = "c7"> ${col7}</td>
+                                                        <td class = "c8"> ${col8}</td>
+                                                        <td class = "c9"> ${col9}</td>
+                                                        </tr>`;
+                        }
+
+                        let table_template = `<table><thead><tr><th class = "y"> Year </th>
+                                                                <th class = "c1"> Average MORTCFAL </th>
+                                                                <th class = "c2"> AGENTCD_10 </th>
+                                                                <th class = "c3"> AGENTCD_20 </th>
+                                                                <th class = "c4"> AGENTCD_30 </th>
+                                                                <th class = "c5"> AGENTCD_40 </th>
+                                                                <th class = "c6"> AGENTCD_50 </th>
+                                                                <th class = "c7"> AGENTCD_60 </th>
+                                                                <th class = "c8"> AGENTCD_70 </th>
+                                                                <th class = "c9"> AGENTCD_80 </th>
+                                                                </tr></thead>
+                                                                <tbody>${table_body_contents}</tbody></table>`; 
+                        $("#x_table").append(table_template); 
+                    }
+                }
+
+                //function to receive the data from the AJAX get request			
+                function draw_histogram(chart_data) {  //data is called chart_data here
+                
+                    // Load the corechart package.
+                    google.charts.load('current', {'packages':['corechart']});
+                    
+                    //function to call when google charts is loaded, send chart_data to this function
+                    google.charts.setOnLoadCallback(function(){
+                            format_histogram_7(chart_data);  //passing chart_data to this function
+                });    
+            }
+                function format_histogram_7(chart_data){
+                    $("#x_histogram").empty(); //empty histogram 
+                    if (chart_data.length == 0) {
+                        alert(`There was no data for this query!`);
+                        return false;
+                    }
+
+                    var data = new google.visualization.DataTable();
+
+                    data.addColumn('string', 'ID'); // Implicit series 1 data col.
+                    data.addColumn('number', 'Total_GROWCFAL'); // Implicit series 1 data col.
+                    data.addColumn('number', 'Total_MORTCFAL'); // Implicit series 1 data col.
+                    data.addColumn('number', 'Year'); // Implicit series 1 data col.
+                    data.addColumn('number', 'Tree_Population'); // Implicit series 1 data col.
+
+                    // format json chart_data to javascript data_rows array
+                    const data_rows=[];
+                    for (let row=0; row<chart_data.length; row++){
+                        data_rows.push(chart_data[row]);
+                    }
+                    // add data_rows to data
+                    data.addRows(data_rows);
+                    var formatter = new google.visualization.NumberFormat({pattern: '####'});
+                    formatter.format(data, 3)
+
+                    var options = {
+                        title: 'Growth  vs  Mortality in selected years (2003-2019).' +
+                        ' X=GROWCFAL, Y=MORTCFAL, Bubble size=Tree_Count_Per_Year, Bubble color=Year',
+                        hAxis: {title: 'GROWCFAL (VOLCFSND)'},
+                        vAxis: {title: 'MORTCFAL (VOLCFSND)'},
+                        bubble: {textStyle: {fontSize: 11}},
+                        legend: {position: 'bottom'}
+                    };
+
+                    var chart = new google.visualization.BubbleChart(document.getElementById('x_histogram'));
+                    chart.draw(data, options);
+                }
+
+                function format_table_7(data){
+                    $("#x_table").empty(); //empty histogram 
+                    if(data.length == 0) {
+                        alert(`There is no species abundance in this table.`);
+                        return false; 
+                    }
+                    else {
+                        $("#x_table").append(`<div class="tabt"> Table of Sum GROWCFAL/MORTCFAL Per Year</div>`);
+                        $("#x_table").append(`<div class="tabt"> <br> </div>`); 
+                        $("#x_table").append(`<div class="tabt"> Please note that the AGENTCD_X columns are one hot encondings (or counts) of each AGENTCD type for each year!</div>`); 
+                        let table_body_contents = ""; 
+                        for (let row = 0; row<data.length; row++){
+                            let year= data[row][0]; 
+                            let col1 = data[row][1];
+                            let col2 = data[row][2]; 
+                            let col3 = data[row][3];
+                            let col4 = data[row][4];
+                            let col5 = data[row][5];
+                            let col6 = data[row][6]; 
+                            let col7 = data[row][7];
+                            let col8 = data[row][8];
+                            let col9 = data[row][9]; 
+                            let col10 = data[row][10];
+                            let col11 = data[row][11];
+                            table_body_contents += `<tr><td class = "y">${year}</td>
+                                                        <td class = "c1"> ${col1}</td>
+                                                        <td class = "c2"> ${col2}</td>
+                                                        <td class = "c3"> ${col3}</td>
+                                                        <td class = "c4"> ${col4}</td>
+                                                        <td class = "c5"> ${col5}</td>
+                                                        <td class = "c6"> ${col6}</td>
+                                                        <td class = "c7"> ${col7}</td>
+                                                        <td class = "c8"> ${col8}</td>
+                                                        <td class = "c9"> ${col9}</td>
+                                                        <td class = "c10"> ${col10}</td>
+                                                        <td class = "c11"> ${col11}</td>
+                                                        </tr>`;
+                        }
+
+                        let table_template = `<table><thead><tr><th class = "y"> SUM_GROWCFAL </th>
+                                                                <th class = "c1"> SUM_MORTCFAL </th>
+                                                                <th class = "c2"> Year </th>
+                                                                <th class = "c3"> Trees_Count_Per_Year </th>
+                                                                <th class = "c4"> AGENTCD_10 </th>
+                                                                <th class = "c5"> AGENTCD_20 </th>
+                                                                <th class = "c6"> AGENTCD_30 </th>
+                                                                <th class = "c7"> AGENTCD_40 </th>
+                                                                <th class = "c8"> AGENTCD_50 </th>
+                                                                <th class = "c9"> AGENTCD_60 </th>
+                                                                <th class = "c10"> AGENTCD_70 </th>
+                                                                <th class = "c11"> AGENTCD_80 </th>
+                                                                </tr></thead>
+                                                                <tbody>${table_body_contents}</tbody></table>`; 
+                        $("#x_table").append(table_template); 
+                    }
+                }
+
+                function download_csv() {
+                    // Variable to store the final csv data
+                    var csv_data = [];
+
+                    // Get each row data
+                    const table = document.getElementById('x_table');
+                    var rows = table.getElementsByTagName('tr');
+                    for (var i = 0; i < rows.length; i++) {
+
+                        // Get each column data
+                        var cols = rows[i].querySelectorAll('td','th');
+
+                        // Stores each csv row data
+                        var csvrow = [];
+                        for (var j = 0; j < cols.length; j++) {
+
+                            // Get the text data of each cell of
+                            // a row and push it to csvrow
+                            csvrow.push(cols[j].innerHTML);
+                        }
+
+                        // Combine each column value with comma
+                        csv_data.push(csvrow.join(","));
+                    }
+                    // combine each row data with new line character
+                    csv_data = csv_data.join('\n');
+
+                    /* We will use this function later to download
+                    the data in a csv file downloadCSVFile(csv_data);
+                    */
+
+                    // Create CSV file object and feed our
+                    // csv_data into it
+                    CSVFile = new Blob([csv_data], { type: "text/csv" });
+                
+                    // Create to temporary link to initiate
+                    // download process
+                    var temp_link = document.createElement('a');
+                
+                    // Download csv file
+                    temp_link.download = "tree_data.csv";
+                    var url = window.URL.createObjectURL(CSVFile);
+                    temp_link.href = url;
+                
+                    // This link should not be displayed
+                    temp_link.style.display = "none";
+                    document.body.appendChild(temp_link);
+                
+                    // Automatically click the link to trigger download
+                    temp_link.click();
+                    document.body.removeChild(temp_link);
+                }
+        </script>
+    </body>
+</html>      
