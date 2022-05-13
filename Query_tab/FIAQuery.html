@@ -1,0 +1,908 @@
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+
+  <!-- CSS -->
+  <style>
+    /* asterisk below selects all elements, use it for styles that aren't inherited, like box-sizing */
+    /* box-sizing: border-box allows setting sizes for element content, padding, and border */
+    * {
+      box-sizing: border-box;
+    }
+
+    /* body selects the body element */
+    /* styles set here are inherited into some subelements of the body, unless overridden */
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      margin: 0;
+    }
+
+    .container {
+      margin: 30px;
+    }
+
+    /* Header/logo Title */
+    .header {
+      padding: 2px;
+      text-align: center;
+      background: #6B8E23;
+      color: White;
+    }
+
+    /* Increase the font size of the heading */
+    .header h1 {
+      font-size: 30px;
+    }
+
+    /* Sticky navbar - toggles between relative and fixed, depending on the scroll position. It is positioned relative until a given offset position is met in the viewport - then it "sticks" in place (like position:fixed). The sticky value is not supported in IE or Edge 15 and earlier versions. However, for these versions the navbar will inherit default position */
+    .navbar {
+      overflow: hidden;
+      background-color: #333;
+      position: sticky;
+      position: -webkit-sticky;
+      top: 0;
+    }
+
+    /* Style the navigation bar links */
+    .navbar a {
+      float: left;
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 20px;
+      text-decoration: none;
+    }
+
+
+    /* Right-aligned link */
+    .navbar a.right {
+      float: right;
+    }
+
+    /* Change color on hover */
+    .navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    /* Active/current link */
+    .navbar a.active {
+      background-color: #666;
+      color: white;
+    }
+
+    /* Style inputs */
+    /* input {
+      border: 1px solid transparent;
+      background-color: #f1f1f1; */
+    /* slightly gray */
+    /* padding: 10px;
+      font-size: 20px;
+    } */
+
+    /* sets style for the submit button */
+    .button {
+      background-color: rgb(26, 72, 3);
+      color: #fff;
+      /* white; */
+      font-size: larger;
+    }
+
+    #btn2 {
+      vertical-align: top;
+      position: relative;
+      left: 500px;
+      bottom: 1050px;
+    }
+
+    /* sets styles for a select element dropdown option */
+    select {
+      font-size: 16px;
+      width: fit-content;
+    }
+
+
+    /* sets styles for a table, table header cell (th), and a table data cell (td) */
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 15px;
+    }
+
+    /* sets width for the entire table */
+    table {
+      width: 400px;
+    }
+
+    /* sets text alignment for a table header cell */
+    th {
+      text-align: left;
+    }
+
+    /* sets text alignment for a table data cell */
+    td {
+      text-align: left;
+    }
+
+    /* overrides default background color for every other table row (tr) */
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    #wrapper {
+      border: 1px solid white;
+    }
+
+    #x_table {
+      vertical-align: top;
+      display: inline-block;
+      width: 500px;
+      height: 800px;
+    }
+
+    .scroll {
+      vertical-align: top;
+      overflow-y: scroll;
+      height: 800px;
+      width: 500px;
+      background-color: #fff;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 5px;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      background: #ddd;
+    }
+
+    #year1 {
+      margin-right: 16px;
+    }
+
+    /* sets style for the tables */
+    .styled-table {
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.9em;
+      font-family: sans-serif;
+      min-width: 400px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .styled-table thead tr {
+      background-color: #05a5ad;
+      color: #ffffff;
+      text-align: left;
+    }
+
+    .styled-table th,
+    .styled-table td {
+      padding: 12px 15px;
+      text-align: center;
+    }
+
+    .styled-table tbody tr {
+      border-bottom: 1px solid #090909;
+    }
+
+    .styled-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    .styled-table tbody tr:last-of-type {
+      border-bottom: 2px solid #090909;
+    }
+  </style>
+  <!-- load the jQuery library -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>Massachusetts National FIA Tree Database
+    </h1>
+    <p>A <b>database</b> for massachusetts forests</p>
+  </div>
+
+  <div class="navbar">
+    <a href="home.html">Home</a>
+    <a href="FIAQuery.html" class="active">Query</a>
+    <a href="groupF_histo.html">Plots</a>
+    <a href="help.html">Help</a>
+    <a href="contacts.html">Contact Us</a>
+  </div>
+
+  <div class="container">
+    <h1>Query</h1>
+    <p> This is a page for a query search in the Forest Inventory and Analysis (FIA) Database for information
+      regarding
+      forests in the state of Massachusetts. <br>
+      In the form below, please select from the following categories:
+    <ul style=“list-style-type:circle”>
+      <li> Biomass - information on carbon above ground(AG) and below ground(BG) (Carbon AG/BG, and Dry Biomass)
+      </li>
+      <li> Growth - information on growth measurements (Average, Annual)</li>
+      <li> Mortality - information on mortality and decay code counts (Mortality Code Counts, Decay Code Counts)
+      </li>
+      <li> Species - information on distinct species and their counts for a plot in a year</li>
+      <li> Tree Dimension - information on the mean diameter measurements in a plot</li>
+      <li> Trees per Acre - information on the Trees per Acre counts in the database and for distinct species
+        (Total TPA, TPA for Species)</li>
+      <li> Trees Per Plot - information on the total tree counts in a plot</li>
+    </ul>
+    <br>
+    After each categorical selection and subselection, the user can choose to query by plot number or by year and
+    year ranges. After selections are done, the user can click the Submit button to see the queried results in the
+    form of a table. There will also be a Download button under the Query Results for the user to download the
+    query table in the form of a csv file. Please note that the download option is only available upon successful
+    return of a query table.
+    <br><br>
+
+    <!--Query topics as drop box -->
+    Please select a category. <br><br>
+    Query fields:
+    <select id='category' type='dropdown' name='firstChoice'>
+      <option value='' selected></option>
+      <option value='Biomass'>Biomass</option>
+      <option value='Growth'>Growth</option>
+      <option value='Mortality'>Mortality</option>
+      <option value='Species'>Species</option>
+      <option value='Tree Dimension'>Tree Dimension</option>
+      <option value='Trees per Acre'>Trees per Acre</option>
+      <option value='Trees Per Plot'>Trees Per Plot</option>
+    </select>
+    <br><br>
+    <div id="subcategory_choices">
+      <p class="secondChoice">Please select a subcategory.<br><br>
+        Query subfields:</p>
+      <select id='subcategory' type='dropdown' class='secondChoice'>
+      </select>
+      <div id="description"></div>
+    </div>
+    <br>
+    <div hidden id="plotyeardiv">Query by:
+      <select id='plotyear' type='dropdown'>
+        <option value=''></option>
+        <option value='plot'>plot</option>
+        <option value='year'>year</option>
+        <option value='year range' id="yr">year range</option>
+      </select>
+    </div><br>
+    <!-- Subcategories as text -->
+    <label for="year1" class="year1">Choose year:</label>
+    <select id='year1' class="year1" type='dropdown' name='choice'></select>
+    <label for="year2" class="year2">Choose a second year for desired year range:</label>
+    <select id='year2' class="year2" type='dropdown' name='choice'></select>
+
+    <br>
+    <label for="plot" class="plot">Plot: </label><select class="plot" id='plot' name='plot_num'></select>
+    <br><br>
+
+    <!-- Submit Button-->
+    <button class="button" id="submit" style="height: 35px; width: 80px;"> Submit </button>
+
+    <br><br>
+    <div id="query_table"></div>
+    </p>
+
+    <!-- javascript -->
+    <script>
+
+      //start after the document is loaded
+      $(document).ready(function () {
+        $('#category').val($('#category option:first').val());
+        $('#plotyear').val($('#plotyear option:first').val());
+        $('#subcategory').empty();
+        $('#year1').empty();
+        $('#year2').empty();
+        $('#plot').empty();
+        $('.secondChoice').hide();
+        hideQueryBy();
+        $('#submit').hide();
+
+        $('#category').on('change', function () {
+          let cat = $('#category').val();
+          $('#plotyear').val($('#plotyear option:first').val());
+          $('#description').hide();
+          $('#subcategory').empty();
+          $('#query_table').empty();
+          $('#query_table').hide();
+          hideQueryBy();
+          $('#submit').hide();
+          $('#yr').show();
+          if ((cat == 'Species') || (cat == 'Tree Dimension') || (cat == 'Trees Per Plot')) {
+            $('#plotyeardiv').fadeIn();
+            fillDescription();
+            $('.secondChoice').hide();
+          }
+          else {
+            if (cat == 'Trees per Acre') {
+              $('#yr').hide();
+            }
+              $('#plotyeardiv').hide();
+              $('.secondChoice').fadeIn();
+              fillSubCategory();
+          }
+        });
+
+        $('#subcategory').on('change', function () {
+          let subcat = $('#subcategory').val();
+          $('#plotyear').val($('#plotyear option:first').val());
+          $('#description').hide();
+          hideQueryBy();
+          $('#submit').hide();
+          $('#query_table').hide();
+
+          if ((subcat == 'Mortality Code Counts') ||
+            (subcat == 'Damage Code Counts') ||
+            (subcat == 'Annual Growth')) {
+            $('#plotyeardiv').hide();
+            fillDescription();
+            $('#submit').fadeIn();
+          }
+          else if (subcat == '') {
+            $('#plotyeardiv').hide();
+          }
+          else {
+            $('#plotyeardiv').fadeIn();
+            fillDescription();
+          }
+        });
+
+        $('#plotyear').on('change', function () {
+          let py = $('#plotyear').val();
+          if (py == 'plot') {
+            $('.year1').hide();
+            $('.year2').hide();
+            $('#query_table').hide();
+            $('.plot').fadeIn();
+            fillPlotDropdown();
+            $('#submit').hide();
+          }
+          else if ((py == 'year') || (py == 'year range')) {
+            $('.plot').hide();
+            $('.year2').hide();
+            $('#query_table').hide();
+            $('.year1').fadeIn();
+            fillYear1Dropdown();
+            $('#submit').hide();
+          }
+          else {
+            hideQueryBy();
+            $('#submit').hide();
+            $('#query_table').hide();
+          }
+        });
+
+        $('#year1').on('change', function () {
+          $('#query_table').hide();
+          if (($('#plotyear').val() == 'year range') && ($('#year1').val() == '2019')) {
+            $('.year2').fadeIn();
+            fillYear2Dropdown();
+            $('#submit').fadeIn();
+          }
+          else if ($('#plotyear').val() == 'year range') {
+            $('.year2').fadeIn();
+            fillYear2Dropdown();
+            $('#submit').hide();
+          }
+          else {
+            $('#submit').fadeIn();
+          }
+        });
+
+        $('#year2').on('change', function () {
+          $('#submit').fadeIn();
+        });
+
+        $('#plot').on('change', function () {
+          $('#submit').fadeIn();
+        });
+
+        $("#submit").click(function () {
+          let cat = $('#category').val();
+          let subcat = $('#subcategory').val();
+
+          if ((subcat == 'Mortality Code Counts') ||
+            (subcat == 'Damage Code Counts') ||
+            (subcat == 'Annual Growth')) {
+            getQueryTable();
+            $('#query_table').fadeIn();
+          }
+          else {
+            let py = $('#plotyear').val();
+            let year1_input = $("#year1").val();
+            let year2_input = $("#year2").val();
+            let plot_input = $("#plot").val();
+
+            if ((year1_input == '') && (py == 'year')) {
+              alert('Please select a year.');
+            }
+            else if ((py == 'year range') && (year1_input == '2019')) {
+              alert('Please select a different starting year for the year range.');
+            }
+            else if ((py == 'year range') && (year1_input == '') && (year2_input == '')) {
+              alert('Please select two years for the year range.');
+            }
+            else if ((py == 'year range') && (year2_input == '')) {
+              alert('Please select a second year for the year range.');
+            }
+            else if ((py == 'year range') && (year1_input == '')) {
+              alert('Please select a starting year for the year range.');
+            }
+            else if ((py == 'plot') && (plot_input == '')) {
+              alert('Please select a plot number.');
+            }
+            else {
+              //AJAX to get table data
+              getQueryTable();
+              $('#query_table').fadeIn();
+            }
+          }
+        });
+      });
+
+      function hideQueryBy() {
+        $('.year1').hide();
+        $('.year2').hide();
+        $('.plot').hide();
+        emptyQueryBy();
+      }
+
+      function emptyQueryBy() {
+        $('#year1').empty();
+        $('#year2').empty();
+        $('#plot').empty();
+      }
+
+      function fillCategory() {
+        let cat = ['Biomass', 'Growth', 'Mortality', 'Species', 'Tree Dimension', 'Trees per Acre', 'Trees Per Plot'];
+        let options = '';
+        let cat_options = `<option value=''></option>`;
+        for (let item = 0; item < cat.length; item++) {
+          options = cat[item];
+          cat_options += `<option value="${options}">${options}</option>`;
+        }
+        $('#category').append(cat_options);
+      }
+
+      function fillSubCategory() {
+        let cat = $('#category').val();
+        let bio = ['Carbon AG/BG', 'Dry Biomass'];
+        let growth = ['Average Growth', 'Annual Growth'];
+        let mortality = ['Mortality Code Counts', 'Damage Code Counts'];
+        let tpa = ['Total TPA', 'TPA by Species'];
+        let options = '';
+        let cat_options = `<option value=''></option>`;
+        if (cat == 'Biomass') {
+          for (let item = 0; item < bio.length; item++) {
+            options = bio[item];
+            cat_options += `<option value="${options}">${options}</option>`;
+          }
+          $('#subcategory').append(cat_options);
+        }
+        else if (cat == 'Growth') {
+          for (let item = 0; item < growth.length; item++) {
+            options = growth[item];
+            cat_options += `<option value="${options}">${options}</option>`;
+          }
+          $('#subcategory').append(cat_options);
+        }
+        else if (cat == 'Mortality') {
+          for (let item = 0; item < mortality.length; item++) {
+            options = mortality[item];
+            cat_options += `<option value="${options}">${options}</option>`;
+          }
+          $('#subcategory').append(cat_options);
+        }
+        else if (cat == 'Trees per Acre') {
+          for (let item = 0; item < tpa.length; item++) {
+            options = tpa[item];
+            cat_options += `<option value="${options}">${options}</option>`;
+          }
+          $('#subcategory').append(cat_options);
+        }
+      }
+
+      function fillDescription() {
+        $('#description').empty();
+        if ($('#subcategory :selected').text() == 'Carbon AG/BG') {
+          $('#description').append(
+            `<p class="description">Returns Above Ground (AG) and Below Ground (BG) carbon counts (sums) in pounds for every county/plot combination for specified year or every year/county<br>
+              combination for plot selection. Grouped and Ordered by Year, County, and Plot. NB: Must be multiplied by TPA Unadjusted for per acre information. </p>`)
+        }
+        else if ($('#subcategory :selected').text() == 'Dry Biomass') {
+          $('#description').append(
+            `<p class="description">Returns sums of Bole, Top, Stump, Sapling, Woodland Tree Species, and Below Ground dry biomass in pounds per specified year or plot selection.<br>
+              Grouped and Ordered by Year, Plot. NB: Must be multiplied by TPA Unadjusted for per acre information. </p>`)
+        }
+        else if ($('#subcategory :selected').text() == 'Average Growth') {
+          $('#description').append(
+            `<p class="description">Returns means of net cubic foot growth (CF_Growth), Diameter - Begin (DIA_start), - Midpoint (DIA_mid), - End (DIA_end), Annual Diameter Growth (Ann_DIA_Grwth),<br>
+              Height - Begin (HT-start), - Midpoint (HT_mid), -End (HT_end), Annual Height Growth (Ann_HT_Grwth) for specified year, year range, or plot. <br>
+              Grouped by Year, Plot. NB: As CF_Growth is net growth, it can be negative. Diameters are measured in Inches and Height is measured in Feet. </p>`)
+        }
+        else if ($('#subcategory :selected').text() == 'Annual Growth') {
+          $('#description').append(
+            `<p class="description">Returns sum of cubic foot growth (CF_Growth), Annual Diameter and Height Growth (Ann_DIA_Grwth and Ann_HT_Grwth in Inch/Year and Feet/Year respectively) <br>
+              per year for all years. Grouped by Year. NB: As CF_Growth is net growth, it can be negative.</p>`
+          )
+        }
+        else if ($('#subcategory :selected').text() == 'Mortality Code Counts') {
+          $('#description').append(
+            `<p class="description">Returns year, agent code and its respective counts for all years. Grouped by Year, Agent Code. Ordered by Year. See Help page for code table.</p>`
+          )
+        }
+        else if ($('#subcategory :selected').text() == 'Damage Code Counts') {
+          $('#description').append(
+            `<p class="description">Returns year, decay code and its respective counts for all years. Grouped by Year, Decay Code. Ordered by Year. See Help page for code table.</p>`
+          )
+        }
+        else if ($('#category :selected').text() == 'Species') {
+          $('#description').append(
+            `<p class="description">Returns total counts of each species for each plot in the specified year or year ranges, or for each year<br>
+              in the selected plot. Grouped and Ordered by Year, Plot, and Species ID. NB: Species Code was obtained from FIA Database.</p>`
+          )
+        }
+        else if ($('#category :selected').text() == 'Tree Dimension') {
+          $('#description').append(
+            `<p class="description">Returns mean DBH for all year: county: plot combination for year, year range, or plot selected. <br>
+              Grouped by Year, County, Plot. NB: DBH: Diameter Measured in Inches at Breast Height. </p>`
+          )
+        }
+        else if ($('#subcategory :selected').text() == 'Total TPA') {
+          $('#description').append(
+            `<p class="description">Returns means of all Trees Per Acre (TPA) measurements by selected plot for all years measured or for all plots <br>
+                          in the year selected. All TPA measurements are unadjusted. Grouped and Ordered by Year, Plot. <br>
+                          NB:'None' refers to zero value measurements. No year range option will be available for this selection.</p>`
+          )
+        }
+        else if ($('#subcategory :selected').text() == 'TPA by Species') {
+          $('#description').append(
+            `<p class="description">Returns mean Trees Per Acre (TPA) measurements for each species/year/plot combination that have a averaged unadjusted TPA > 0 <br>
+                          for all plots for selected year or for all years in a selected plot. Grouped by Year, Plot, and Species ID. Ordered by Year and Plot. <br>
+                          NB: 'None' refers to zero value measurements from original data. No year range option will be available for this selection. </p>`
+          )
+        }
+        else if ($('#category :selected').text() == "Trees Per Plot") {
+          $('#description').append(
+            `<p class="description">Returns total tree counts per year measured for specified plot, or per county/plot for selected year(s).<br>
+              Grouped by Year, County, and Plot. </p>`
+          )
+        }
+        $('#description').show();
+      }
+
+      function fillYear1Dropdown() {
+        let year = $('#year1').val();
+
+        $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/FIAQuery.py",
+          { selector: "year1", year1: year },
+          function (data) {
+            format_year1_options(data);
+          },
+          "json"
+        );
+      };
+
+      function fillYear2Dropdown() {
+        let year1 = $("#year1").val();
+        let year2 = $('#year2').val();
+
+        if (year1) {
+          input_data = { selector: "year2", year1: year1, year2: year2 };
+        }
+        else {
+          input_data = { selector: "year2", year2: year2 };
+        }
+
+        $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/FIAQuery.py",
+          input_data,
+          function (data) {
+            format_year2_options(data);
+          },
+          "json"
+        );
+
+      };
+
+      function fillPlotDropdown() {
+        let choosePlot = $('#plot').val();
+
+        $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/FIAQuery.py",
+          { selector: 'plot', plot: choosePlot },
+          function (data) {
+            format_plot_options(data);
+          },
+          "json"
+        );
+      };
+
+      function getQueryTable() {
+        let cat = $("#category").val();
+        let subcat = $('#subcategory').val();
+        let plotyear = $('#plotyear').val();
+        let year1 = $("#year1").val();
+        let year2 = $("#year2").val();
+        let plot = $('#plot').val();
+
+        if ((cat == "Growth") && (subcat == "Annual Growth")) {
+          input_data = {
+            selector: "query_table", plotyear: plotyear, category: cat,
+            subcategory: subcat
+          }
+        }
+        else if ((cat == "Mortality") && (subcat == "Mortality Code Counts")) {
+          input_data = {
+            selector: "query_table", plotyear: plotyear, category: cat,
+            subcategory: subcat
+          }
+        }
+        else if ((cat == "Mortality") && (subcat == "Damage Code Counts")) {
+          input_data = {
+            selector: "query_table", plotyear: plotyear, category: cat,
+            subcategory: subcat
+          }
+        }
+        else if ((cat == "Species") && (plotyear == "plot")) {
+          input_data = {
+            selector: "query_table", plotyear: plotyear, category: cat,
+            plot: plot
+          }
+        }
+        else if ((cat == "Species") && (plotyear == "year")) {
+          input_data = {
+            selector: "query_table", plotyear: plotyear, category: cat,
+            year1: year1
+          }
+        }
+        else if ((cat == "Species") && (plotyear == "year range")) {
+          input_data = {
+            selector: "query_table", plotyear: plotyear, category: cat,
+            year1: year1, year2: year2
+          }
+        }
+        else if (cat == "Tree Dimension") {
+          if (plotyear == "plot") {
+            input_data = {
+              selector: "query_table", plotyear: plotyear, category: cat,
+              plot: plot
+            }
+          }
+          else if (plotyear == "year") {
+            input_data = {
+              selector: "query_table", plotyear: plotyear, category: cat,
+              year1: year1
+            }
+          }
+          else if (plotyear == "year range") {
+            input_data = {
+              selector: "query_table", plotyear: plotyear, category: cat,
+              year1: year1, year2: year2
+            }
+          }
+        }
+        else if (cat == "Trees Per Plot") {
+          if (plotyear == "plot") {
+            input_data = {
+              selector: "query_table", plotyear: plotyear, category: cat,
+              plot: plot
+            }
+          }
+          else if (plotyear == "year") {
+            input_data = {
+              selector: "query_table", plotyear: plotyear, category: cat,
+              year1: year1
+            }
+          }
+          else if (plotyear == "year range") {
+            input_data = {
+              selector: "query_table", plotyear: plotyear, category: cat,
+              year1: year1, year2: year2
+            }
+          }
+        }
+        else {
+          if (plotyear == 'plot') {
+            input_data = {
+              selector: "query_table", plotyear: plotyear, category: cat,
+              subcategory: subcat, plot: plot
+            }
+          }
+          else if (plotyear == "year") {
+            input_data = {
+              selector: "query_table", plotyear: plotyear, category: cat,
+              subcategory: subcat, year1: year1
+            }
+          }
+          else if (plotyear == "year range") {
+            input_data = {
+              selector: "query_table", plotyear: plotyear, category: cat,
+              subcategory: subcat, year1: year1, year2: year2
+            }
+          }
+        }
+
+        $.get("https://bioed.bu.edu/cgi-bin/students_22/Group_F/FIAQuery.py",
+          input_data,
+          function (data) {
+            format_query_table(data);
+          },
+          "json"
+        );
+      };
+
+      function format_year1_options(data) {
+        $('#year1').empty();
+        let plotyear = $('#plotyear').val();
+
+        let year_options = '<option value="" selected="selected">- All -</option>';
+        for (let row = 0; row < data.length; row++) {
+          year = data[row];
+          year_options += `<option value="${year}">${year}</option>`;
+        }
+        //append the options
+        $("#year1").append(year_options);
+      };
+
+      function format_year2_options(data) {
+        $("#year2").empty();
+
+        let year_options = '';
+        for (let row = 0; row < data.length; row++) {
+          year = data[row];
+          year_options += `<option value="${year}">${year}</option>`;
+        }
+
+        let year1_choice = $("#year1").val();
+        if (!year1_choice) {
+          $("#year2").append('<option value="" selected="selected">- All -</option>');
+          $("#year2").append(year_options);
+        }
+        else {
+          $('#year2').append('<option value="" selected="selected">- N/A -</option>');
+          $("#year2").append(year_options);
+        }
+      };
+
+      function format_plot_options(data) {
+        $('#plot').empty();
+
+        let plot_options = '<option value="" selected="selected">- All -</option>';
+        for (let row = 0; row < data.length; row++) {
+          plot = data[row];
+          plot_options += `<option value="${plot}">${plot}</option>`;
+        }
+        //append the gene options
+        $("#plot").append(plot_options);
+      };
+
+      function format_query_table(data) {
+        let year1_num = $("#year1").val();
+        let year2_num = $("#year2").val();
+        let plot_num = $("#plot").val();
+
+        if (data.length < 1) {
+          comment = `Sorry, the query you are looking for does not exist. Please select a different option and try again.`;
+          document.getElementById("query_table").innerHTML = comment;
+        }
+        else {
+          // clear any existing html in the query_table div
+          $("#query_table").empty();
+
+          //append the table title
+          $("#query_table").append("<h3>Query Results</h3>");
+
+          //format the table rows
+          let data_head = data[0];
+          let table_head = '<thead><tr>';
+          for (let word = 0; word < data_head.length; word++) {
+            table_head += `<th>${data_head[word]}</th>`;
+          }
+          table_head += `</tr></thead><body>`;
+
+
+          let table_body_contents = "";
+          for (let rowIndex = 1; rowIndex < data.length; rowIndex++) {
+            const row = data[rowIndex];
+            let tableRow = "<tr>";
+            for (let colIndex = 0; colIndex < row.length; colIndex++) {
+              tableRow += `<td>${row[colIndex]}</td>`;
+            }
+            tableRow += "</tr>";
+            table_body_contents += tableRow;
+          }
+
+          //format the table
+          let table_template = `<table class="styled-table">${table_head}${table_body_contents}</tbody></table>`;
+          $("#query_table").append(table_template);
+          $("#query_table").append(`<br><button class="button" id='download' onclick="download_csv()" style="height:60px; width:100px;">Download CSV</button>`);
+          $('#query_table').fadeIn();
+        }
+      }
+
+      function download_csv() {
+        // Variable to store the final csv data
+        var csv_data = [];
+
+        // Get each row data
+        const table = document.getElementById('query_table');
+        var rows = table.getElementsByTagName('tr');
+        var headerCols = rows[0].querySelectorAll('th');
+
+        var csvrow = [];
+        for (let j = 0; j < headerCols.length; j++) {
+
+          // Get the text data of each cell of
+          // a row and push it to csvrow
+          csvrow.push(headerCols[j].innerText);
+        }
+        csv_data.push(csvrow.join(","));
+
+        for (var i = 1; i < rows.length; i++) {
+
+          // Get each column data
+          var cols = rows[i].querySelectorAll('td');
+          csvrow = [];
+
+          // Stores each csv row data
+          for (var j = 0; j < cols.length; j++) {
+
+            // Get the text data of each cell of
+            // a row and push it to csvrow
+            csvrow.push(cols[j].innerText);
+          }
+
+          // Combine each column value with comma
+          csv_data.push(csvrow.join(","));
+        }
+        // combine each row data with new line character
+        csv_data = csv_data.join('\n');
+
+        /* We will use this function later to download
+        the data in a csv file downloadCSVFile(csv_data);
+        */
+
+        // Create CSV file object and feed our
+        // csv_data into it
+        CSVFile = new Blob([csv_data], { type: "text/csv" });
+
+        // Create to temporary link to initiate
+        // download process
+        var temp_link = document.createElement('a');
+
+        // Download csv file
+        temp_link.download = "query_data.csv";
+        var url = window.URL.createObjectURL(CSVFile);
+        temp_link.href = url;
+
+        // This link should not be displayed
+        temp_link.style.display = "none";
+        document.body.appendChild(temp_link);
+
+        // Automatically click the link to trigger download
+        temp_link.click();
+        document.body.removeChild(temp_link);
+      }
+
+    </script>
+  </div>
+  <div class="footer">
+    <p>This project was developed at Boston University as
+      part of BF768, Spring 2022, G. Benson instructor</p>
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Boston_University_wordmark.svg/1000px-Boston_University_wordmark.svg.png?20200623211014"
+      alt="H" width="120" height="50">
+    <p>Last revised April 27, 2022</p>
+  </div>
+</body>
+
+</html>
