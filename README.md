@@ -22,4 +22,3 @@ https://bioed.bu.edu/students_22/Group_F/FIADB.html
   - **plots.py**: This file is the CGI component which handles connection between the database and client requests. For each dropdown menu page, there are two different tables being generated, one for the plot and another for the table plot. 
   - **plots.html**: The UI interface for this page 
   - **How to run**: Just open the html file in a web browser and explore the page!
-  - <img width="1459" alt="Screen Shot 2022-05-12 at 4 40 15 PM" src="https://user-images.githubusercontent.com/16998734/168164119-0e8ba4b7-af7b-46ab-8159-9cff0085b000.png">
